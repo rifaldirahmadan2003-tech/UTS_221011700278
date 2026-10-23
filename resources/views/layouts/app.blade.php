@@ -1,68 +1,33 @@
+
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <meta charset="UTF-8">
+    <title>{{ config('app.name', 'ROOTSPACE') }}</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>
-        @yield('title', 'UNPAM - Profile Mahasiswa')
-    </title>
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
 </head>
+<body class="font-sans antialiased">
+    <div class="min-h-screen bg-gray-100">
+        @include('layouts.navigation')
 
-<body class="bg-light d-flex flex-column min-vh-100">
+        @isset($header)
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endisset
 
-
-    <nav class="navbar navbar-dark bg-primary">
-
-        <div class="container">
-
-            <a class="navbar-brand" href="/">
-                UNPAM - Profile Mahasiswa
-            </a>
-
-            <div>
-
-                <a href="/" class="text-white text-decoration-none me-3">
-                    Home
-                </a>
-
-                <a href="/profile" class="text-white text-decoration-none me-3">
-                    Profile
-                </a>
-
-                <a href="/about" class="text-white text-decoration-none">
-                    About
-                </a>
-
-            </div>
-
-        </div>
-
-    </nav>
-
-
-    <div class="container flex-grow-1">
-
-        @yield('content')
-
+        <main>
+            {{ $slot }}
+        </main>
     </div>
-
-
-    <footer class="bg-light text-dark border-top text-center py-3 mt-auto">
-
-        <p class="mb-0">
-            &copy; {{ date('Y') }} UNPAM. All rights reserved.
-        </p>
-
-    </footer>
-
-
 </body>
-
 </html>

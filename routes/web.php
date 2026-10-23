@@ -1,21 +1,21 @@
+
 <?php
 
-use App\Http\Controllers\MahasiswaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CourseController;
+use Illuminate\Support\Facades\Auth;
 
+Route::get('/', [CourseController::class, 'index'])
+    ->name('courses.index');
 
-Route::get('/', function () {
+Route::get('/courses/{course}', [CourseController::class, 'show'])
+    ->name('courses.show');
 
-    return view('home');
-
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return redirect()->route('courses.index')
+            ->with('success', 'Login berhasil. Selamat datang di ROOTSPACE!');
+    })->name('dashboard');
 });
 
-
-Route::get('/profile', [MahasiswaController::class, 'index']);
-
-
-Route::get('/about', function () {
-
-    return view('about');
-
-});
+require __DIR__.'/auth.php';
