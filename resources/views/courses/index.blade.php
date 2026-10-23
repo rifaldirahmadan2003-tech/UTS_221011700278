@@ -1143,7 +1143,7 @@ $courseImages = [
 
                                 <img
                                     class="course-cover"
-                                    src="{{ $resolveImage($courseImages[$course->title] ?? null, $course->image ?? null, 'hero-garden.jpg') }}"
+                                    src="{{ $resolveImage($courseImages[$course->title] ?? null, $course->image ?? null) }}"
                                     alt="{{ $course->title }}"
                                     loading="lazy"
                                 >

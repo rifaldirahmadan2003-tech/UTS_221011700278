@@ -444,7 +444,7 @@
             <div class="detail-cover-wrap">
                 <img
                     class="detail-cover"
-                    src="{{ $resolveImage($course->image ?? null, $course->title ?? null) }}"
+                    src="{{ asset('images/' . $course->image) }}"
                     alt="{{ $course->title }}"
                 >
             </div>
